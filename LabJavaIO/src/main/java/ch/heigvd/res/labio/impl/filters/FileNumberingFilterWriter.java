@@ -79,5 +79,5 @@ public class FileNumberingFilterWriter extends FilterWriter {
         }
 
     }
-    
+
 }

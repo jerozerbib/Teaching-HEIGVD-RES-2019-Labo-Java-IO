@@ -4,7 +4,6 @@ import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-import static java.lang.Character.toUpperCase;
 
 /**
  *
@@ -33,7 +32,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-    super.write(toUpperCase(c));
+    super.write(Character.toUpperCase(c));
   }
 
 }
