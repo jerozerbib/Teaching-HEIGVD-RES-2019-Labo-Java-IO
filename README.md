@@ -11,10 +11,10 @@ We changed the project structure. In previous editions, there was a "test" proje
 For this lab, we will try the following workflow:
 * create a branch for the entire lab (you call it "dev", "lab" or whatever you want)
 * commit code as soon as possible and push the branch to your fork
-* open a PR
+* open a PR. In the name of the PR, start with `[WIP] `. This makes it easy for us to see that you are still working on the lab (Work In Progress) 
 * even if tests are still red, we have a communication space while you work on the lab
 * whenever you push a new commit, we will be able to see it (and possibly to comment it)
-* at some point, all your tests will be green: you can then signal that you are done; for that we will try the code review feature (you will ask us for a review); more on this later
+* at some point, all your tests will be green: you can then signal that you are done; for that, change the name of your PR. Replace `[WIP] ` with `[TOREVIEW] `.
 
 Push commits as often as possible (whenever you make progress, turn a test green, etc.).
 
