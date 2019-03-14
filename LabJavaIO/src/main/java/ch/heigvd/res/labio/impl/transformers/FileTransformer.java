@@ -23,7 +23,6 @@ public abstract class FileTransformer implements IFileVisitor {
 
   private static final Logger LOG = Logger.getLogger(FileTransformer.class.getName());
   private final List<FilterWriter> filters = new ArrayList<>();
-  private char[] buffer = new char[64];
 
   /**
    * The subclasses implement this method to define what transformation(s) are
@@ -58,8 +57,9 @@ public abstract class FileTransformer implements IFileVisitor {
       reader = new BufferedReader(reader);
 
       int size;
-      while ((size = reader.read(buffer)) != -1){
-        writer.write(buffer, 0, size);
+      
+      while ((size = reader.read()) != -1){
+        writer.write(size);
       }
 
 
