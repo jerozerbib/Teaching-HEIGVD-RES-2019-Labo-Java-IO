@@ -18,9 +18,8 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
 
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
-    private boolean firstLine = true;
     private int lineNumber = 1;
-    private boolean lineBreak = false;
+    private boolean lineBreak = true;
 
 
     public FileNumberingFilterWriter(Writer out) {
@@ -45,39 +44,60 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     @Override
     public void write(int c) throws IOException {
-        if (firstLine){
-            firstLine = false;
-            for (char ch : Integer.toString(lineNumber).toCharArray()){
-                super.write(ch);
-            }
-            super.write('\t');
-            lineNumber++;
-        }
-
-
-        if (c == '\r'){
-            lineBreak = true;
-            super.write(c);
-        } else if (c == '\n'){
-            lineBreak = false;
-            super.write(c);
-            for (char ch : Integer.toString(lineNumber).toCharArray()){
-                super.write(ch);
-            }
-            super.write('\t');
-            lineNumber++;
-        } else {
-            if (lineBreak){
+        switch (c){
+            case '\n':
                 lineBreak = false;
-                for (char ch : Integer.toString(lineNumber).toCharArray()){
+                super.write(c);
+                for (char ch : Integer.toString(lineNumber).toCharArray()) {
                     super.write(ch);
                 }
                 super.write('\t');
                 lineNumber++;
-            }
-            super.write(c);
+                break;
+            case '\r':
+                lineBreak = true;
+                super.write(c);
+                break;
+            default:
+                if (lineBreak) {
+                    lineBreak = false;
+                    for (char ch : Integer.toString(lineNumber).toCharArray()) {
+                        super.write(ch);
+                    }
+                    super.write('\t');
+                    lineNumber++;
+                }
+                super.write(c);
+
         }
 
+        //The commented code underneath serves the purpose of generalizing the rules for break lines
+        //With the @Override close() method below, we could generalize the rules as below
+
+//        if (c == '\n' || c == '\r') {
+//            lineBreak = true;
+//            super.write(c);
+//        } else {
+//            if (lineBreak) {
+//                lineBreak = false;
+//                for (char ch : Integer.toString(lineNumber).toCharArray()) {
+//                    super.write(ch);
+//                }
+//                super.write('\t');
+//                lineNumber++;
+//            }
+//            super.write(c);
+//        }
     }
 
+//    @Override
+//    public void close() throws IOException {
+//        if (lineBreak){
+//            for (char ch : Integer.toString(lineNumber).toCharArray()){
+//                super.write(ch);
+//            }
+//            super.write('\t');
+//        }
+//        super.close();
+//    }
 }

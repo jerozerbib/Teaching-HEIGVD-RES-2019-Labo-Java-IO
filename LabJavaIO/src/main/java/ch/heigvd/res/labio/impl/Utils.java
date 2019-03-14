@@ -22,24 +22,23 @@ public class Utils {
    */
   public static String[] getNextLine(String lines) {
     int firstOccurenceOfLineBreak;
-    int lengthOfBreak;
+    int lengthOfBreak = 1;
 
 
     if (lines.contains("\n")){
       firstOccurenceOfLineBreak = lines.indexOf("\n");
-      lengthOfBreak = 1;
     } else if (lines.contains("\r")){
       firstOccurenceOfLineBreak = lines.indexOf("\r");
-      lengthOfBreak = 1;
     } else if (lines.contains("\r\n")){
       firstOccurenceOfLineBreak = lines.indexOf("\r\n");
-      lengthOfBreak = 2;
+      lengthOfBreak++;
     } else {
       return new String[]{"", lines};
     }
 
     return new String[]{lines.substring(0, firstOccurenceOfLineBreak + lengthOfBreak),
             lines.substring(firstOccurenceOfLineBreak + lengthOfBreak)};
+
   }
 
 }

@@ -3,6 +3,7 @@ package ch.heigvd.res.labio.impl.transformers;
 import ch.heigvd.res.labio.interfaces.IFileVisitor;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -43,8 +44,8 @@ public abstract class FileTransformer implements IFileVisitor {
       return;
     }
     try {
-      Reader reader = new InputStreamReader(new FileInputStream(file), "UTF-8");
-      Writer writer = new OutputStreamWriter(new FileOutputStream(file.getPath()+ ".out"), "UTF-8"); // the bug fix by teacher
+      Reader reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
+      Writer writer = new OutputStreamWriter(new FileOutputStream(file.getPath()+ ".out"), StandardCharsets.UTF_8); // the bug fix by teacher
       writer = decorateWithFilters(writer);
 
       /*
@@ -55,7 +56,7 @@ public abstract class FileTransformer implements IFileVisitor {
 
 
       reader = new BufferedReader(reader);
-      
+
       int size;
       while ((size = reader.read(buffer)) != -1){
         writer.write(buffer, 0, size);

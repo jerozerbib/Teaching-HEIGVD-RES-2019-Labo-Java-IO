@@ -10,6 +10,7 @@ import ch.heigvd.res.labio.quotes.QuoteClient;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -130,7 +131,7 @@ public class Application implements IApplication {
     File newF = new File(path.toString());
     newF.getParentFile().mkdirs();
 
-    Writer writer = new OutputStreamWriter(new FileOutputStream(newF), "UTF-8");
+    Writer writer = new OutputStreamWriter(new FileOutputStream(newF), StandardCharsets.UTF_8);
     writer.write(quote.getQuote());
     writer.close();
   }
